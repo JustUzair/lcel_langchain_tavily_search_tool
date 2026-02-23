@@ -9,3 +9,20 @@ export const WebSearchResultSchema = z.object({
 export const WebSearchResultsSchema = z.array(WebSearchResultSchema).max(10);
 
 export type WebSearchResults = z.infer<typeof WebSearchResultsSchema>;
+
+export const OpenURLInputSchema = z.object({
+  url: z.url(),
+});
+
+export const OpenURLOutputSchema = z.object({
+  url: z.url(),
+  content: z.string().min(1),
+});
+
+export const SummarizeInputSchema = z.object({
+  text: z.string().min(50, "Need more text to summarize"),
+});
+
+export const SummarizeOutputSchema = z.object({
+  summary: z.string().min(1),
+});
