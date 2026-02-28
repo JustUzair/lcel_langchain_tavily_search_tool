@@ -1,6 +1,6 @@
 import { SystemMessage, HumanMessage } from "@langchain/core/messages";
-import { makeModel } from "../shared/models";
-import { SummarizeInputSchema, SummarizeOutputSchema } from "./schema";
+import { makeModel } from "../shared/models.js";
+import { SummarizeInputSchema, SummarizeOutputSchema } from "./schema.js";
 
 export async function summarize(text: string) {
   const { text: raw } = SummarizeInputSchema.parse({ text });

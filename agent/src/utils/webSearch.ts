@@ -1,9 +1,9 @@
-import { env } from "../shared/env";
+import { env } from "../shared/env.js";
 import {
   WebSearchResults,
   WebSearchResultsSchema,
   WebSearchResultSchema,
-} from "./schema";
+} from "./schema.js";
 
 export async function webSearch(q: string) {
   const query = (q ?? "").trim();

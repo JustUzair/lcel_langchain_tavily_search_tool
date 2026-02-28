@@ -1,5 +1,5 @@
 import { convert } from "html-to-text";
-import { OpenURLOutputSchema } from "./schema";
+import { OpenURLOutputSchema } from "./schema.js";
 
 export async function openUrl(url: string) {
   const normalized = validateURL(url);
