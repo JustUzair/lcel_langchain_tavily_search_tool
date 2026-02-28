@@ -9,6 +9,7 @@ export const finalValidateAndPolish = RunnableLambda.from(
     const finalDraft = {
       answer: candidate.answer,
       sources: candidate.sources ?? [],
+      mode: candidate.mode,
     };
 
     const parsed = SearchAnswerSchema.safeParse(finalDraft);
