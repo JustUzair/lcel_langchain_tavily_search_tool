@@ -20,22 +20,22 @@ export function makeModel(opts: ModelOptions = {}): BaseChatModel {
   switch (env.MODEL_PROVIDER) {
     case "gemini":
       return new ChatGoogleGenerativeAI({
-        apiKey: env.GEMINI_API_KEY,
-        model: env.GEMINI_MODEL,
+        apiKey: env.GEMINI_API_KEY!,
+        model: env.GEMINI_MODEL!,
         temperature,
         maxOutputTokens: opts.maxTokens,
       });
     case "openai":
       return new ChatOpenAI({
-        apiKey: env.OPENAI_API_KEY,
-        model: env.OPENAI_MODEL,
+        apiKey: env.OPENAI_API_KEY!,
+        model: env.OPENAI_MODEL!,
         temperature,
         maxTokens: opts.maxTokens,
       });
     case "deepseek":
       return new ChatDeepSeek({
-        apiKey: env.DEEPSEEK_API_KEY,
-        model: env.DEEPSEEK_MODEL,
+        apiKey: env.DEEPSEEK_API_KEY!,
+        model: env.DEEPSEEK_MODEL!,
         temperature,
         maxTokens: opts.maxTokens,
       });
@@ -43,8 +43,8 @@ export function makeModel(opts: ModelOptions = {}): BaseChatModel {
     case "groq":
     default:
       return new ChatGroq({
-        apiKey: env.GROQ_API_KEY,
-        model: env.GROQ_MODEL,
+        apiKey: env.GROQ_API_KEY!,
+        model: env.GROQ_MODEL!,
         temperature,
         maxTokens: opts.maxTokens,
       });
