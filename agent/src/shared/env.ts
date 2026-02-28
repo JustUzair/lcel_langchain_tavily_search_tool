@@ -12,7 +12,7 @@ const EnvSchema = z.object({
   DEEPSEEK_API_KEY: z.string().optional(),
   GROQ_API_KEY: z.string().optional(),
   TAVILY_API_KEY: z.string().min(1),
-  PORT: z.string().min(1),
+  PORT: z.string().default("8000"),
   ALLOWED_ORIGIN: z.string().min(1),
   OPENAI_MODEL: z.string().optional(),
   GEMINI_MODEL: z.string().optional(),

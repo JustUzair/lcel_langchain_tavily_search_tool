@@ -24,6 +24,9 @@ const limiter = rateLimit({
 
 const app = express();
 
+app.get("/", (_, res) => {
+  res.redirect("/status");
+});
 app.get("/favicon.ico", (req, res) => {
   res.sendFile(path.join(process.cwd(), "public", "favicon.ico"));
 });
