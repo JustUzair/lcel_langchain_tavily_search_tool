@@ -1,12 +1,12 @@
 <div align="center">
 
 ```
- ██████╗ ███╗   ███╗███╗   ██╗██╗███████╗
-██╔═══██╗████╗ ████║████╗  ██║██║██╔════╝
-██║   ██║██╔████╔██║██╔██╗ ██║██║███████╗
-██║   ██║██║╚██╔╝██║██║╚██╗██║██║╚════██║
-╚██████╔╝██║ ╚═╝ ██║██║ ╚████║██║███████║
- ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝╚══════╝
+           ██████╗ ███╗   ███╗███╗   ██╗██╗███████╗
+           ██╔═══██╗████╗ ████║████╗  ██║██║██╔════╝
+           ██║   ██║██╔████╔██║██╔██╗ ██║██║███████╗
+           ██║   ██║██║╚██╔╝██║██║╚██╗██║██║╚════██║
+           ╚██████╔╝██║ ╚═╝ ██║██║ ╚████║██║███████║
+            ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝╚══════╝
 ```
 
 **Intelligence + Web Synthesis Engine**
@@ -47,7 +47,7 @@ The frontend is a Next.js app with a dark industrial aesthetic, heavy motion, 3D
 ┌─────────────────────────────────────────────────────────────────┐
 │                        CLIENT BROWSER                           │
 │                  Next.js App (Vercel)                           │
-│         POST /api/search → Next.js API Route (proxy)           │
+│         POST /api/search → Next.js API Route (proxy)            │
 └──────────────────────────┬──────────────────────────────────────┘
                            │ x-api-key (server-side only)
                            ▼
@@ -55,7 +55,7 @@ The frontend is a Next.js app with a dark industrial aesthetic, heavy motion, 3D
 │                     EXPRESS BACKEND                             │
 │                   (Vercel Serverless)                           │
 │                                                                 │
-│   Rate Limiter (10 req / 10 min)  ──→  CORS  ──→  Controller   │
+│   Rate Limiter (10 req / 10 min)  ──→  CORS  ──→  Controller    │
 └──────────────────────────┬──────────────────────────────────────┘
                            │
                            ▼
@@ -77,11 +77,11 @@ The frontend is a Next.js app with a dark industrial aesthetic, heavy motion, 3D
           └──────┬───────┘  └──────┬────────┘
                  │                 │
                  ▼                 ▼
-    ┌────────────────────┐    ┌──────────────────┐
+    ┌────────────────────┐    ┌───────────────────┐
     │ 1. Tavily Search   │    │  LLM Direct Call  │
     │ 2. Fetch & Scrape  │    │  (no web, purely  │
-    │ 3. LLM Summarize   │    │   model knowledge)│
-    │ 4. LLM Synthesize  │    └──────────────────┘
+    │ 3. LLM Summarize   │    │  model knowledge) │
+    │ 4. LLM Synthesize  │    └───────────────────┘
     └────────────────────┘
                  │                 │
                  └────────┬────────┘
@@ -120,14 +120,14 @@ Query
   │
   ▼
 ┌─────────────────────────────────────────┐
-│  STEP 1, Tavily Search                 │
+│  STEP 1, Tavily Search                  │
 │  Searches the web, returns top 5        │
 │  results: title, URL, snippet           │
 └─────────────────┬───────────────────────┘
                   │
                   ▼
 ┌─────────────────────────────────────────┐
-│  STEP 2, Open & Fetch                  │
+│  STEP 2, Open & Fetch                   │
 │  Visits each URL, scrapes HTML,         │
 │  converts to plain text via             │
 │  html-to-text. If a page fails to       │
@@ -136,7 +136,7 @@ Query
                   │
                   ▼
 ┌─────────────────────────────────────────┐
-│  STEP 3, Summarize                     │
+│  STEP 3, Summarize                      │
 │  Each page's raw text is individually   │
 │  summarized by the LLM into 5-8         │
 │  sentences. Temperature: 0.4            │
@@ -145,7 +145,7 @@ Query
                   │
                   ▼
 ┌─────────────────────────────────────────┐
-│  STEP 4, Synthesize                    │
+│  STEP 4, Synthesize                     │
 │  All summaries are passed together to   │
 │  the LLM with the original query. The   │
 │  LLM composes a single cohesive answer  │
@@ -239,50 +239,6 @@ The same `MODEL_PROVIDER` config applies to all three LLM calls in the web pipel
 
 ---
 
-## Environment Variables
-
-### Backend (`agent/.env`)
-
-```env
-# Which LLM to use
-MODEL_PROVIDER=gemini           # gemini | openai | groq | deepseek
-
-# LLM API keys (only the one matching MODEL_PROVIDER is required)
-GEMINI_API_KEY=
-OPENAI_API_KEY=
-GROQ_API_KEY=
-DEEPSEEK_API_KEY=
-
-# Optional: pin specific model versions
-GEMINI_MODEL=
-OPENAI_MODEL=
-GROQ_MODEL=
-DEEPSEEK_MODEL=
-
-# Search
-SEARCH_PROVIDER=tavily          # tavily | google
-TAVILY_API_KEY=
-
-# Server
-PORT=8000                       # Not used on Vercel (managed internally)
-ALLOWED_ORIGIN=http://localhost:3000
-
-# RAG layer model (optional, defaults to MODEL_PROVIDER)
-RAG_MODEL_PROVIDER=gemini
-
-# Auth (used by Next.js proxy to authenticate backend calls)
-API_SECRET=
-```
-
-### Frontend (`client/.env.local`)
-
-```env
-BACKEND_URL=http://localhost:8000
-API_SECRET=                     # Same value as backend, never exposed to browser
-```
-
----
-
 ## Running Locally
 
 **Backend**
@@ -297,11 +253,10 @@ yarn dev
 
 ```bash
 cd client
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
-The backend runs on `http://localhost:8000`. The Next.js proxy at `/api/search` forwards requests to it with the `x-api-key` header attached server-side, so your `API_SECRET` never touches the browser.
 
 ---
 
