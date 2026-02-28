@@ -1,5 +1,5 @@
 import rateLimit from "express-rate-limit";
-import express from "express";
+import express, { Response } from "express";
 import LCELRouter from "./routes/search_lcel.js";
 import cors from "cors";
 import path from "path";
@@ -24,10 +24,10 @@ const limiter = rateLimit({
 
 const app = express();
 
-app.get("/", (_, res) => {
+app.get("/", (_, res: Response) => {
   res.redirect("/status");
 });
-app.get("/favicon.ico", (req, res) => {
+app.get("/favicon.ico", (_, res: Response) => {
   res.sendFile(path.join(process.cwd(), "public", "favicon.ico"));
 });
 
