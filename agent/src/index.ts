@@ -8,7 +8,7 @@ const limiter = rateLimit({
   limit: 10,
   windowMs: 10 * 60 * 1000, // 10 mins
   message: "Too many requests from this IP, please try again in an hour",
-  handler: (req, res) => {
+  handler: (_, res: Response) => {
     res.status(429).json({
       status: "fail",
       message: "Too many requests from this IP, please try again later.",
